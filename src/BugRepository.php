@@ -21,13 +21,20 @@ class BugRepository
 
     public function findAll(DateTimeRange $searchRange, Status $status): array
     {
-        $sql = 'SELECT bug_id, summary, reported_at FROM Bugs
-                WHERE reported_at >= :startAt AND reported_at < :endAt
-                AND status = :status';
+        $startAt = $searchRange->startAt->value();
+        $endAt = $searchRange->endAt->value();
+
+        $startAtOp = $searchRange->startAt->inclusive ? '<=' : '<';
+        $endAtOp = $searchRange->endAt->inclusive ? '<=' : '<';
+        $sql = "SELECT bug_id, summary, reported_at FROM Bugs
+            WHERE
+                status = :status
+                AND :startAt ${startAtOp} reported_at
+                AND reported_at ${endAtOp} :endAt";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':startAt', $searchRange->startAt->value()->format(self::TIMESTAMP_FORMAT), PDO::PARAM_STR);
-        $stmt->bindValue(':endAt', $searchRange->endAt->value()->format(self::TIMESTAMP_FORMAT), PDO::PARAM_STR);
         $stmt->bindValue(':status', $status->value, PDO::PARAM_STR);
+        $stmt->bindValue(':startAt', $startAt->format(self::TIMESTAMP_FORMAT), PDO::PARAM_STR);
+        $stmt->bindValue(':endAt', $endAt->format(self::TIMESTAMP_FORMAT), PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, Bug::class);
     }
