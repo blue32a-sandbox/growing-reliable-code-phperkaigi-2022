@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use PhperKaig\Bug;
 use PhperKaig\BugRepository;
+use PhperKaig\Status;
 use PHPUnit\Framework\TestCase;
 
 class BugRepositoryTest extends TestCase
@@ -21,7 +22,7 @@ class BugRepositoryTest extends TestCase
         $bugs = $repo->findAll(
             new DateTime('2021-01-01'),
             new DateTime('2022-01-01'),
-            'OPEN'
+            Status::Open
         );
         $this->assertCount(3, $bugs);
 
