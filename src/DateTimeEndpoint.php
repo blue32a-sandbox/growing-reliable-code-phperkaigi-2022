@@ -22,18 +22,18 @@ final class DateTimeEndpoint
         return DateTimeImmutable::createFromInterface($this->value);
     }
 
-    public static function icluding(string $dateTimeStr): DateTimeEndpoint
+    public static function icluding(DateTimeImmutable $value): DateTimeEndpoint
     {
         return new DateTimeEndpoint(
-            value: new DateTimeImmutable($dateTimeStr),
+            value: $value,
             inclusive: true
         );
     }
 
-    public static function excluding(string $dateTimeStr): DateTimeEndpoint
+    public static function excluding(DateTimeImmutable $value): DateTimeEndpoint
     {
         return new DateTimeEndpoint(
-            value: new DateTimeImmutable($dateTimeStr),
+            value: $value,
             inclusive: false
         );
     }

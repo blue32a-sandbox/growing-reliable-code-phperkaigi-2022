@@ -8,6 +8,7 @@ use PhperKaigi\DateTimeEndpoint;
 use PhperKaigi\DateTimeRange;
 use PhperKaigi\Subscription;
 use PHPUnit\Framework\TestCase;
+use Tests\DateTimeShorthandHelper as DT;
 
 class SubscriptionTest extends TestCase
 {
@@ -17,8 +18,8 @@ class SubscriptionTest extends TestCase
     public function renewメソッドは期間を1年延長した新しいインスタンスを返す(): void
     {
         $year2021 = new DateTimeRange(
-            startAt: DateTimeEndpoint::icluding('2021-01-01'),
-            endAt: DateTimeEndpoint::excluding('2022-01-01')
+            startAt: DateTimeEndpoint::icluding(DT::jst('2021-01-01')),
+            endAt: DateTimeEndpoint::excluding(DT::jst('2022-01-01'))
         );
         $phpstorm = new Subscription('PhpStorm', $year2021);
         $this->assertSame('PhpStorm(2021-01-01 -> 2022-01-01)', strval($phpstorm));

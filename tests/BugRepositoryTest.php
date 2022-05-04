@@ -11,6 +11,7 @@ use PhperKaigi\DateTimeEndpoint;
 use PhperKaigi\DateTimeRange;
 use PhperKaigi\Status;
 use PHPUnit\Framework\TestCase;
+use Tests\DateTimeShorthandHelper as DT;
 
 class BugRepositoryTest extends TestCase
 {
@@ -25,8 +26,8 @@ class BugRepositoryTest extends TestCase
     public function testFindAll(): void
     {
         $range = new DateTimeRange(
-            DateTimeEndpoint::icluding('2021-01-01'),
-            DateTimeEndpoint::excluding('2022-01-01')
+            DateTimeEndpoint::icluding(DT::jst('2021-01-01')),
+            DateTimeEndpoint::excluding(DT::jst('2022-01-01'))
         );
         $bugs = $this->repo->findAll(searchRange: $range, status: Status::Open);
         $this->assertCount(3, $bugs);
