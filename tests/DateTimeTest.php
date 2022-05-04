@@ -45,4 +45,18 @@ class DateTimeTest extends TestCase
         $this->assertEquals('2021-10-31', $halloween->format('Y-m-d'));
         $this->assertEquals('2022-10-31', $halloween2022->format('Y-m-d'));
     }
+
+    /**
+     * @test
+     * @group learning
+     */
+    public function コンストラクタをもう一度呼ぶと破壊的変更ができてしまう(): void
+    {
+        $dt = new DateTimeImmutable('2021-12-24');
+        $this->assertSame('2021-12-24', $dt->format('Y-m-d'));
+
+        $dt->__construct('2022-01-01');
+
+        $this->assertSame('2022-01-01', $dt->format('Y-m-d'));
+    }
 }

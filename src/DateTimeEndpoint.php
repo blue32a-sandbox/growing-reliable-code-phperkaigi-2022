@@ -4,19 +4,28 @@ declare(strict_types=1);
 
 namespace PhperKaig;
 
-use DateTime;
+use DateTimeImmutable;
 
 final class DateTimeEndpoint
 {
+    private readonly DateTimeImmutable $value;
+
     public function __construct(
-        public readonly DateTime $value,
+        DateTimeImmutable $value,
         public readonly bool $inclusive,
-    ) {}
+    ) {
+        $this->value = DateTimeImmutable::createFromInterface($value);
+    }
+
+    public function value(): DateTimeImmutable
+    {
+        return DateTimeImmutable::createFromInterface($this->value);
+    }
 
     public static function icluding(string $dateTimeStr): DateTimeEndpoint
     {
         return new DateTimeEndpoint(
-            value: new DateTime($dateTimeStr),
+            value: new DateTimeImmutable($dateTimeStr),
             inclusive: true
         );
     }
@@ -24,7 +33,7 @@ final class DateTimeEndpoint
     public static function excluding(string $dateTimeStr): DateTimeEndpoint
     {
         return new DateTimeEndpoint(
-            value: new DateTime($dateTimeStr),
+            value: new DateTimeImmutable($dateTimeStr),
             inclusive: false
         );
     }
