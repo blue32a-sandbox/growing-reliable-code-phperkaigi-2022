@@ -4,26 +4,28 @@ declare(strict_types=1);
 
 use PhperKaig\Bug;
 use PhperKaig\BugRepository;
+use PhperKaig\DateTimeEndpoint;
+use PhperKaig\DateTimeRange;
 use PhperKaig\Status;
 use PHPUnit\Framework\TestCase;
 
 class BugRepositoryTest extends TestCase
 {
-    private $pdo;
+    private BugRepository $repo;
 
     public function setUp(): void
     {
-        $this->pdo = new PDO('mysql:host=mysql;dbname=sample', 'root', 'mlrtpd');
+        $pdo = new PDO('mysql:host=mysql;dbname=sample', 'root', 'mlrtpd');
+        $this->repo = new BugRepository($pdo);
     }
 
     public function testFindAll(): void
     {
-        $repo = new BugRepository($this->pdo);
-        $bugs = $repo->findAll(
-            new DateTime('2021-01-01'),
-            new DateTime('2022-01-01'),
-            Status::Open
+        $range = new DateTimeRange(
+            DateTimeEndpoint::icluding('2021-01-01'),
+            DateTimeEndpoint::excluding('2022-01-01')
         );
+        $bugs = $this->repo->findAll(searchRange: $range, status: Status::Open);
         $this->assertCount(3, $bugs);
 
         $bug1 = $bugs[0];
