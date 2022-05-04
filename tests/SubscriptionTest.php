@@ -11,7 +11,10 @@ use PHPUnit\Framework\TestCase;
 
 class SubscriptionTest extends TestCase
 {
-    public function testRenew(): void
+    /**
+     * @test
+     */
+    public function renewメソッドは期間を1年延長した新しいインスタンスを返す(): void
     {
         $year2021 = new DateTimeRange(
             startAt: DateTimeEndpoint::icluding('2021-01-01'),
