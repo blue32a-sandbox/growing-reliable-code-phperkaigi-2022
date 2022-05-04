@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+namespace Tests;
+
+use PDO;
 use PhperKaig\Bug;
 use PhperKaig\BugRepository;
 use PhperKaig\DateTimeEndpoint;
