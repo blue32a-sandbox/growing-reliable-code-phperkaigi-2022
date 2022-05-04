@@ -7,3 +7,6 @@ composer.lock
 
 # Remote Contaier
 /.devcontainer
+
+# PHP Unit
+.phpunit.result.cache
