@@ -18,11 +18,11 @@ class BugRepositoryTest extends TestCase
     public function testFindAll(): void
     {
         $repo = new BugRepository($this->pdo);
-        $bugs = $repo->findAll([
-            'startAt' => '2021-01-01',
-            'endAt' => '2022-01-01',
-            'status' => 'OPEN',
-        ]);
+        $bugs = $repo->findAll(
+            new DateTime('2021-01-01'),
+            new DateTime('2022-01-01'),
+            'OPEN'
+        );
         $this->assertCount(3, $bugs);
 
         $bug1 = $bugs[0];
