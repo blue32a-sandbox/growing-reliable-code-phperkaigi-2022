@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhperKaig;
+namespace PhperKaigi;
 
 use DateInterval;
 use Stringable;

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use PhperKaig\DateTimeEndpoint;
-use PhperKaig\DateTimeRange;
-use PhperKaig\Subscription;
+use PhperKaigi\DateTimeEndpoint;
+use PhperKaigi\DateTimeRange;
+use PhperKaigi\Subscription;
 use PHPUnit\Framework\TestCase;
 
 class SubscriptionTest extends TestCase

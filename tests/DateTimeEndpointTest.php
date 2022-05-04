@@ -7,7 +7,7 @@ namespace Tests;
 use DateTimeImmutable;
 use DateTimeZone;
 use Error;
-use PhperKaig\DateTimeEndpoint;
+use PhperKaigi\DateTimeEndpoint;
 use PHPUnit\Framework\TestCase;
 
 class DateTimeEndpointTest extends TestCase
@@ -36,7 +36,7 @@ class DateTimeEndpointTest extends TestCase
         try {
             $endpoint->__construct(value: $newDate, inclusive: true);
         } catch (Error $expected) {
-            $this->assertSame('Cannot modify readonly property PhperKaig\DateTimeEndpoint::$inclusive', $expected->getMessage());
+            $this->assertSame('Cannot modify readonly property PhperKaigi\DateTimeEndpoint::$inclusive', $expected->getMessage());
             return;
         }
         $this->fail('例外が発生していない');

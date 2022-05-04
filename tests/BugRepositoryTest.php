@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests;
 
 use PDO;
-use PhperKaig\Bug;
-use PhperKaig\BugRepository;
-use PhperKaig\DateTimeEndpoint;
-use PhperKaig\DateTimeRange;
-use PhperKaig\Status;
+use PhperKaigi\Bug;
+use PhperKaigi\BugRepository;
+use PhperKaigi\DateTimeEndpoint;
+use PhperKaigi\DateTimeRange;
+use PhperKaigi\Status;
 use PHPUnit\Framework\TestCase;
 
 class BugRepositoryTest extends TestCase
